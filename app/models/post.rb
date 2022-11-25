@@ -11,8 +11,11 @@ class Post < ApplicationRecord
 #     "Top ",
 #     "Guess",
 #   ]
- 
-CLICKBAIT_PATTERNS = [
+#  "Won't Believe"
+# "Secret"
+# "Top [number]"
+# "Guess"
+VALIDATE= [
     /Won't Believe/i,
     /Secret/i,
     /Top \d/i,
@@ -20,7 +23,7 @@ CLICKBAIT_PATTERNS = [
   ]
 
   def clickbait?
-    if CLICKBAIT_PATTERNS.none? { |pat| pat.match title }
+    if VALIDATE.none? { |pat| pat.match title }
       errors.add(:title, "must be clickbait")
     end
   end
