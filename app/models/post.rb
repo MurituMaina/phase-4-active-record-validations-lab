@@ -5,25 +5,10 @@ class Post < ApplicationRecord
   validates :category, inclusion: ["Fiction", "Non-Fiction"]
   validate :clickbait?
 
-#   CLICKBAIT_PATTERNS = [
-#     "Won't Believe",
-#     "Secret",
-#     "Top ",
-#     "Guess",
-#   ]
-#  "Won't Believe"
-# "Secret"
-# "Top [number]"
-# "Guess"
-VALIDATE= [
-    /Won't Believe/i,
-    /Secret/i,
-    /Top \d/i,
-    /Guess/i,
-  ]
+  TEST = [/Won't Believe/, /Secret/, /Top \d/i, /Guess/]
 
   def clickbait?
-    if VALIDATE.none? { |pat| pat.match title }
+    if TEST.none? { |t| t.match title }
       errors.add(:title, "must be clickbait")
     end
   end
